@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="copyright"content="&copy; GODSON V O TEAM-5">
+    <title>Bolt XP TEAM 5</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background: #222; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .menu { font-size: 24px; cursor: pointer; margin-left: 20px; }
+        .buttons { display: flex; gap: 10px; margin-right: 20px; }
+        .btn { background: #222; color: white; padding: 10px 15px; border-radius: 8px; border: 2px solid white; cursor: pointer; }
+        .logo-container { flex-grow: 1; text-align: center; }
+        .logo { font-size: 2em; font-weight: bold; }
+        .slogan { font-style: italic; font-size: 1.2em; color: #ddd; }
+        .container { width: 80%; margin: auto; padding: 20px; }
+        .logo-section img { width: 200px; height: auto; margin: 20px 0; }
+        .slider-container { position: relative; width: 80%; margin: auto; overflow: hidden; }
+        .slider { display: flex; transition: transform 1s ease-in-out; }
+        .slide { min-width: 100%; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
+        .team-member { background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
+        .team-member img { width: 250px; height: 300px; border-radius: 10px; }
+        .slider-container:hover .prev, .slider-container:hover .next { display: block; }
+        .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; display: none; }
+        .prev { left: 10px; }
+        .next { right: 10px; }
+        .footer { background: #222; color: #fff; padding: 20px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="menu">&#9776;</div>
+        <div class="logo-container">
+            <div class="logo">BOLT XP</div>
+            <div class="slogan">"LOUDER THAN THUNDER,FASTER THAN LIGHTNING"</div>
+        </div>
+        <div class="buttons">
+            <button class="btn">Home</button>
+            <button class="btn">Login</button>
+            <button class="btn">Subscribe</button>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="logo-section">
+            <img src="img/logo.jpg" alt="Team Logo">
+        </div>
+        
+        <h2>About Us</h2>
+        <p>We are a team of passionate individuals united by our drive to innovate and excel in everything we do.</p>
+        
+        <h2>Meet the Team</h2>
+        <div class="slider-container">
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="slider">
+                <div class="slide"><div class="team-member"><img src="img/captain.jpg" al
+                    t="Captain"><h3>ADITHYAN VENUGOPAL</h3><p>Captain</p></div></div>
+                <div class="slide"><div class="team-member"><img src="img/vice_captain.jpg" alt="Vice Captain"><h3>JOEL C JOHNSON</h3><p>Vice Captain</p></div></div>
+                <div class="slide"><div class="team-member"><img src="img/member1.jpg" alt="Team Member 1"><h3>GODSON V O</h3></div></div>
+                <div class="slide"><div class="team-member"><img src="img/member2.jpg" alt="Team Member 2"><h3>THOMAS MECHERY</h3></div></div>
+                <div class="slide"><div class="team-member"><img src="img/member3.jpg" alt="Team Member 3"><h3>ADARSH N A</h3></div></div>
+                <div class="slide"><div class="team-member"><img src="img/member4.jpg" alt="Team Member 4"><h3>ROSHIT LAL</h3></div></div>
+                <div class="slide"><div class="team-member"><img src="img/member5.jpg" alt="Team Member 5"><h3>SREEHARI C</h3></div></div>
+                <div class="slide"><div class="team-member"><img src="img/member6.jpg" alt="Team Member 6"><h3>ADHIL SIDIQQ</h3></div></div>
+               
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+        
+        <h2>WHAT MAKES US PEERS!</h2>
+        <p>
+           <ul>
+            <li>WE ARE DETERMINED TO BE CHAMPIONS OF MPOWER 2025</li>
+            <li>WE ARE GOOD AT UNERSTANDING OUR MISTAKES AND CORRECTING THEM</li>
+            <li>WE DREAM BIG AND WORK HARD UNTIL ITS ACHIEVED</li>
+           </ul>
+        </p>
+        
+        <h2>WHAT MAKES US UNIQUE!</h2>
+        <p>
+            <ul>
+                <li>GODSON - WEB DESIGNER</li>
+                <li>SREEHARI - CINEPHILE</li>
+                <li>ADITHYAN - ARM WRESTLER GOLD MEDALIST</li>
+                <li>ROSHIT - TATOO LOVER</li>
+                <li>ADARSH - SPC CADET</li>
+                <li>ADHIL - ONLINE CLOTHING BRAND</li>
+                <li>THOMAS - NCC CADET</li>
+                <li>JOEL - PERSONALIZED EVENT MANAGEMENT</li>
+               </ul>
+        </p>
+    </div>
+    
+    <footer class="footer">
+        <p>Thank You for Visiting!</p>
+        <p>&copy; 2025 BOLT XP. All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        let index = 0;
+        function moveSlide(step) {
+            const slides = document.querySelectorAll(".slide");
+            index += step;
+            if (index >= slides.length) index = 0;
+            if (index < 0) index = slides.length - 1;
+            document.querySelector(".slider").style.transform = `translateX(-${index * 100}%)`;
+        }
+        
+        function autoSlide() {
+            moveSlide(1);
+            setTimeout(autoSlide, 3000);
+        }
+        setTimeout(autoSlide, 3000);
+    </script>
+</body>
+</html>
