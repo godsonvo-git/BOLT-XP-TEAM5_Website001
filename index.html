@@ -1,116 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="copyright"content="&copy; GODSON V O TEAM-5">
-    <title>Bolt XP TEAM 5</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin: 0; padding: 0; background-color: #f4f4f4; }
-        header { background: #222; color: #fff; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: relative; }
-        .menu { font-size: 24px; cursor: pointer; margin-left: 20px; }
-        .buttons { display: flex; gap: 10px; margin-right: 20px; }
-        .btn { background: #222; color: white; padding: 10px 15px; border-radius: 8px; border: 2px solid white; cursor: pointer; }
-        .logo-container { flex-grow: 1; text-align: center; }
-        .logo { font-size: 2em; font-weight: bold; }
-        .slogan { font-style: italic; font-size: 1.2em; color: #ddd; }
-        .container { width: 80%; margin: auto; padding: 20px; }
-        .logo-section img { width: 200px; height: auto; margin: 20px 0; }
-        .slider-container { position: relative; width: 80%; margin: auto; overflow: hidden; }
-        .slider { display: flex; transition: transform 1s ease-in-out; }
-        .slide { min-width: 100%; box-sizing: border-box; display: flex; justify-content: center; align-items: center; }
-        .team-member { background: #fff; padding: 20px; margin: 10px; border-radius: 10px; box-shadow: 2px 2px 10px rgba(0,0,0,0.1); }
-        .team-member img { width: 250px; height: 300px; border-radius: 10px; }
-        .slider-container:hover .prev, .slider-container:hover .next { display: block; }
-        .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.5); color: white; border: none; padding: 10px; cursor: pointer; display: none; }
-        .prev { left: 10px; }
-        .next { right: 10px; }
-        .footer { background: #222; color: #fff; padding: 20px; margin-top: 20px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="copyright" content="&copy; GODSON V O, TEAM BOLT XP">
+<title>Bolt XP — Team 5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0a0c10;
+    --panel:#12151c;
+    --panel-2:#171b24;
+    --line:#262b36;
+    --text:#edeef2;
+    --muted:#8b93a7;
+    --volt:#f4e04d;
+    --volt-dim:#8c8330;
+    --arc:#3ac8ff;
+    --arc-dim:#1c5570;
+    --danger:#ff5d5d;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Inter',sans-serif;
+    overflow-x:hidden;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(rgba(244,224,77,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(244,224,77,0.035) 1px, transparent 1px);
+    background-size:42px 42px;
+    pointer-events:none;
+    z-index:0;
+    mask-image:radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.9), transparent 75%);
+  }
+  ::selection{ background:var(--volt); color:#0a0c10; }
+
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;
+    letter-spacing:.22em;
+    text-transform:uppercase;
+    font-size:12px;
+    color:var(--arc);
+  }
+  .display{ font-family:'Anton',sans-serif; letter-spacing:.01em; text-transform:uppercase; }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    background:rgba(10,12,16,0.72);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .brand{ display:flex; align-items:center; gap:10px; }
+  .brand svg{ width:26px; height:26px; }
+  .brand span{ font-family:'Anton',sans-serif; font-size:20px; letter-spacing:.03em; }
+  nav.buttons{ display:flex; gap:10px; }
+  .btn{
+    font-family:'JetBrains Mono',monospace;
+    font-size:12px; letter-spacing:.08em; text-transform:uppercase;
+    background:transparent; color:var(--text);
+    padding:9px 16px; border-radius:2px;
+    border:1px solid var(--line);
+    cursor:pointer; transition:border-color .25s, color .25s, transform .15s;
+  }
+  .btn:hover{ border-color:var(--volt); color:var(--volt); transform:translateY(-1px); }
+  .btn.primary{ border-color:var(--volt); color:#0a0c10; background:var(--volt); }
+  .btn.primary:hover{ color:#0a0c10; filter:brightness(1.1); }
+  .menu-icon{ display:none; flex-direction:column; gap:4px; cursor:pointer; }
+  .menu-icon span{ width:22px; height:2px; background:var(--text); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:88vh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center;
+    padding:60px 20px 100px;
+    z-index:1;
+  }
+  .hero .eyebrow{ margin-bottom:18px; }
+  .hero h1{
+    font-size:clamp(3.2rem, 13vw, 9rem);
+    line-height:.88;
+    margin:0;
+    color:var(--text);
+    position:relative;
+  }
+  .hero h1 .hl{
+    color:var(--volt);
+    text-shadow:0 0 24px rgba(244,224,77,.35);
+  }
+  .slogan{
+    font-family:'JetBrains Mono',monospace;
+    color:var(--muted);
+    font-size:clamp(.75rem, 1.6vw, 1rem);
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    margin-top:22px;
+  }
+  .slogan b{ color:var(--arc); font-weight:500; }
+
+  .bolt-strike{
+    position:absolute;
+    top:8%; left:50%;
+    width:min(420px, 60vw);
+    transform:translateX(-50%);
+    opacity:.9;
+    z-index:-1;
+  }
+  .bolt-strike path{
+    stroke:var(--volt);
+    stroke-width:2;
+    fill:none;
+    filter:drop-shadow(0 0 10px rgba(244,224,77,.55));
+    stroke-dasharray:900;
+    stroke-dashoffset:900;
+    animation:strike 1.4s cubic-bezier(.2,.8,.2,1) forwards, flicker 4.5s ease-in-out 1.6s infinite;
+  }
+  @keyframes strike{ to{ stroke-dashoffset:0; } }
+  @keyframes flicker{
+    0%,92%,100%{ opacity:.9; }
+    93%{ opacity:.25; }
+    94%{ opacity:.9; }
+    96%{ opacity:.35; }
+    97%{ opacity:.9; }
+  }
+
+  .scroll-cue{
+    margin-top:46px;
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.2em; color:var(--muted);
+    display:flex; flex-direction:column; align-items:center; gap:8px;
+  }
+  .scroll-cue .line{ width:1px; height:34px; background:linear-gradient(var(--arc), transparent); animation:pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{opacity:.2;} 50%{opacity:1;} }
+
+  /* ---------- JAGGED DIVIDER (signature) ---------- */
+  .jagged{ width:100%; height:26px; display:block; }
+  .jagged path{ fill:var(--panel); }
+
+  /* ---------- SECTION ---------- */
+  section{ position:relative; z-index:1; padding:90px 20px; }
+  .wrap{ max-width:1080px; margin:0 auto; }
+  .section-head{ display:flex; align-items:baseline; gap:16px; margin-bottom:44px; flex-wrap:wrap; }
+  .section-head h2{ font-size:clamp(1.8rem,4vw,2.6rem); margin:0; }
+  .section-head .num{ font-family:'JetBrains Mono',monospace; color:var(--arc); font-size:14px; }
+
+  .about{ background:var(--panel); }
+  .about p{ max-width:640px; color:var(--muted); font-size:1.05rem; line-height:1.7; }
+
+  /* reveal on scroll */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---------- TEAM ---------- */
+  .team{ background:var(--bg); }
+  .roster{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(220px,1fr));
+    gap:22px;
+  }
+  .card{
+    position:relative;
+    background:var(--panel-2);
+    border:1px solid var(--line);
+    border-radius:4px;
+    padding:22px 18px 20px;
+    text-align:left;
+    overflow:hidden;
+    transition:transform .3s ease, border-color .3s ease;
+  }
+  .card:hover{ transform:translateY(-6px); border-color:var(--volt); }
+  .card.lead{ grid-column:span 1; }
+  .card .role{
+    font-family:'JetBrains Mono',monospace;
+    font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--volt);
+  }
+  .card.lead .role{ color:var(--arc); }
+  .avatar-wrap{
+    width:100%; aspect-ratio:4/5;
+    border-radius:3px;
+    margin:14px 0 16px;
+    background:#0d0f14;
+    position:relative;
+    overflow:hidden;
+    border:1px solid var(--line);
+  }
+  .avatar-wrap img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .avatar-fallback{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Anton',sans-serif;
+    font-size:2.6rem;
+    color:var(--muted);
+    background:
+      repeating-linear-gradient(135deg, transparent 0 10px, rgba(255,255,255,.02) 10px 20px);
+  }
+  .card h3{ margin:0 0 4px; font-size:1.1rem; letter-spacing:.01em; }
+  .card .trait{ color:var(--muted); font-size:.85rem; margin:0; }
+  .card::after{
+    content:"";
+    position:absolute; inset:0;
+    border-radius:4px;
+    box-shadow:0 0 0 1px transparent;
+    pointer-events:none;
+  }
+  .card:hover .avatar-wrap{ box-shadow:0 0 0 1px var(--volt), 0 0 22px -4px rgba(244,224,77,.5); }
+
+  /* ---------- VALUES ---------- */
+  .values{ background:var(--panel); }
+  .values-grid{ display:grid; grid-template-columns:1fr 1fr; gap:50px; }
+  @media (max-width:760px){ .values-grid{ grid-template-columns:1fr; } }
+  .val-list{ list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; }
+  .val-list li{
+    display:flex; gap:14px; align-items:flex-start;
+    color:var(--text); font-size:1rem; line-height:1.5;
+  }
+  .val-list li svg{ flex:none; margin-top:3px; width:16px; height:16px; }
+  .unique-list{ list-style:none; margin:0; padding:0; }
+  .unique-list li{
+    display:flex; justify-content:space-between; gap:10px;
+    padding:14px 0; border-bottom:1px dashed var(--line);
+    font-family:'JetBrains Mono',monospace; font-size:.92rem;
+  }
+  .unique-list li:first-child{ padding-top:0; }
+  .unique-list li span:first-child{ color:var(--text); font-weight:600; letter-spacing:.03em; }
+  .unique-list li span:last-child{ color:var(--arc); text-align:right; }
+
+  footer{
+    background:#07080b; padding:44px 20px 30px; text-align:center;
+    border-top:1px solid var(--line);
+    position:relative; z-index:1;
+  }
+  footer p{ margin:4px 0; color:var(--muted); font-size:.85rem; font-family:'JetBrains Mono',monospace; }
+  footer .fbrand{ font-family:'Anton',sans-serif; font-size:1.4rem; color:var(--text); margin-bottom:10px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation:none !important; transition:none !important; }
+  }
+
+  @media (max-width:640px){
+    nav.buttons{ display:none; position:absolute; top:64px; right:0; flex-direction:column; background:var(--panel); border:1px solid var(--line); padding:12px; }
+    nav.buttons.open{ display:flex; }
+    .menu-icon{ display:flex; }
+  }
+</style>
 </head>
 <body>
-    <header>
-        <div class="menu">&#9776;</div>
-        <div class="logo-container">
-            <div class="logo">BOLT XP</div>
-            <div class="slogan">"LOUDER THAN THUNDER,FASTER THAN LIGHTNING"</div>
-        </div>
-        <div class="buttons">
-            <button class="btn">Home</button>
-            <button class="btn">Login</button>
-            <button class="btn">Subscribe</button>
-        </div>
-    </header>
-    
-    <div class="container">
-        <div class="logo-section">
-            <img src="img/logo.jpg" alt="Team Logo">
-        </div>
-        
-        <h2>About Us</h2>
-        <p>We are a team of passionate individuals united by our drive to innovate and excel in everything we do.</p>
-        
-        <h2>Meet the Team</h2>
-        <div class="slider-container">
-            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-            <div class="slider">
-                <div class="slide"><div class="team-member"><img src="img/captain.jpg" al
-                    t="Captain"><h3>ADITHYAN VENUGOPAL</h3><p>Captain</p></div></div>
-                <div class="slide"><div class="team-member"><img src="img/vice_captain.jpg" alt="Vice Captain"><h3>JOEL C JOHNSON</h3><p>Vice Captain</p></div></div>
-                <div class="slide"><div class="team-member"><img src="img/member1.jpg" alt="Team Member 1"><h3>GODSON V O</h3></div></div>
-                <div class="slide"><div class="team-member"><img src="img/member2.jpg" alt="Team Member 2"><h3>THOMAS MECHERY</h3></div></div>
-                <div class="slide"><div class="team-member"><img src="img/member3.jpg" alt="Team Member 3"><h3>ADARSH N A</h3></div></div>
-                <div class="slide"><div class="team-member"><img src="img/member4.jpg" alt="Team Member 4"><h3>ROSHIT LAL</h3></div></div>
-                <div class="slide"><div class="team-member"><img src="img/member5.jpg" alt="Team Member 5"><h3>SREEHARI C</h3></div></div>
-                <div class="slide"><div class="team-member"><img src="img/member6.jpg" alt="Team Member 6"><h3>ADHIL SIDIQQ</h3></div></div>
-               
-            <button class="next" onclick="moveSlide(1)">&#10095;</button>
-        </div>
-        
-        <h2>WHAT MAKES US PEERS!</h2>
-        <p>
-           <ul>
-            <li>WE ARE DETERMINED TO BE CHAMPIONS OF MPOWER 2025</li>
-            <li>WE ARE GOOD AT UNERSTANDING OUR MISTAKES AND CORRECTING THEM</li>
-            <li>WE DREAM BIG AND WORK HARD UNTIL ITS ACHIEVED</li>
-           </ul>
-        </p>
-        
-        <h2>WHAT MAKES US UNIQUE!</h2>
-        <p>
-            <ul>
-                <li>GODSON - WEB DESIGNER</li>
-                <li>SREEHARI - CINEPHILE</li>
-                <li>ADITHYAN - ARM WRESTLER GOLD MEDALIST</li>
-                <li>ROSHIT - TATOO LOVER</li>
-                <li>ADARSH - SPC CADET</li>
-                <li>ADHIL - ONLINE CLOTHING BRAND</li>
-                <li>THOMAS - NCC CADET</li>
-                <li>JOEL - PERSONALIZED EVENT MANAGEMENT</li>
-               </ul>
-        </p>
+
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 24 24"><polygon points="13,1 4,14 11,14 9,23 20,9 12,9" fill="#f4e04d"/></svg>
+    <span>BOLT XP</span>
+  </div>
+  <div class="menu-icon" id="menuIcon"><span></span><span></span><span></span></div>
+  <nav class="buttons" id="navButtons">
+    <button class="btn">Home</button>
+    <button class="btn">Login</button>
+    <button class="btn primary">Subscribe</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="eyebrow">Team 5 · MPOWER 2025</div>
+  <h1 class="display">BOLT <span class="hl">XP</span></h1>
+  <svg class="bolt-strike" viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg">
+    <path d="M120 4 L38 130 L92 130 L64 236 L172 96 L108 96 Z"/>
+  </svg>
+  <p class="slogan">Louder than <b>thunder</b>, faster than <b>lightning</b></p>
+  <div class="scroll-cue"><div class="line"></div>SCROLL</div>
+</section>
+
+<svg class="jagged" viewBox="0 0 1200 26" preserveAspectRatio="none"><path d="M0,26 L0,10 L60,20 L120,4 L180,16 L240,2 L300,18 L360,6 L420,22 L480,4 L540,14 L600,0 L660,20 L720,6 L780,16 L840,2 L900,18 L960,8 L1020,20 L1080,4 L1140,16 L1200,6 L1200,26 Z"/></svg>
+
+<section class="about">
+  <div class="wrap reveal">
+    <div class="section-head"><span class="num">01</span><h2>About Us</h2></div>
+    <p>We're a team of eight, wired for momentum. United by a drive to innovate, we treat every mistake as a signal to correct and every deadline as a reason to move faster — building toward one goal: MPOWER 2025.</p>
+  </div>
+</section>
+
+<svg class="jagged" viewBox="0 0 1200 26" preserveAspectRatio="none" style="transform:scaleY(-1);"><path d="M0,26 L0,10 L60,20 L120,4 L180,16 L240,2 L300,18 L360,6 L420,22 L480,4 L540,14 L600,0 L660,20 L720,6 L780,16 L840,2 L900,18 L960,8 L1020,20 L1080,4 L1140,16 L1200,6 L1200,26 Z" style="fill:#0a0c10;"/></svg>
+
+<section class="team">
+  <div class="wrap">
+    <div class="section-head reveal"><span class="num">02</span><h2>Meet the Team</h2></div>
+    <div class="roster" id="roster"></div>
+  </div>
+</section>
+
+<section class="values">
+  <div class="wrap">
+    <div class="values-grid">
+      <div class="reveal">
+        <div class="section-head"><span class="num">03</span><h2>What Makes Us Peers</h2></div>
+        <ul class="val-list">
+          <li><svg viewBox="0 0 24 24"><polygon points="13,1 4,14 11,14 9,23 20,9 12,9" fill="#f4e04d"/></svg> Determined to be champions of MPOWER 2025</li>
+          <li><svg viewBox="0 0 24 24"><polygon points="13,1 4,14 11,14 9,23 20,9 12,9" fill="#3ac8ff"/></svg> Quick to spot mistakes and correct them</li>
+          <li><svg viewBox="0 0 24 24"><polygon points="13,1 4,14 11,14 9,23 20,9 12,9" fill="#f4e04d"/></svg> We dream big and work until it's done</li>
+        </ul>
+      </div>
+      <div class="reveal">
+        <div class="section-head"><span class="num">04</span><h2>What Makes Us Unique</h2></div>
+        <ul class="unique-list" id="uniqueList"></ul>
+      </div>
     </div>
-    
-    <footer class="footer">
-        <p>Thank You for Visiting!</p>
-        <p>&copy; 2025 BOLT XP. All Rights Reserved.</p>
-    </footer>
-    
-    <script>
-        let index = 0;
-        function moveSlide(step) {
-            const slides = document.querySelectorAll(".slide");
-            index += step;
-            if (index >= slides.length) index = 0;
-            if (index < 0) index = slides.length - 1;
-            document.querySelector(".slider").style.transform = `translateX(-${index * 100}%)`;
-        }
-        
-        function autoSlide() {
-            moveSlide(1);
-            setTimeout(autoSlide, 3000);
-        }
-        setTimeout(autoSlide, 3000);
-    </script>
+  </div>
+</section>
+
+<footer>
+  <div class="fbrand">BOLT XP</div>
+  <p>Thank you for visiting.</p>
+  <p>&copy; 2025 Bolt XP · Team 5 · All rights reserved.</p>
+</footer>
+
+<script>
+  // mobile menu
+  const menuIcon = document.getElementById('menuIcon');
+  const navButtons = document.getElementById('navButtons');
+  menuIcon.addEventListener('click', () => navButtons.classList.toggle('open'));
+
+  // team data
+  const team = [
+    { name:"Adithyan Venugopal", role:"Captain", img:"img/captain.jpg", trait:"Arm wrestler · Gold medalist", lead:true },
+    { name:"Joel C Johnson", role:"Vice Captain", img:"img/vice_captain.jpg", trait:"Personalized event management", lead:true },
+    { name:"Godson V O", role:"Member", img:"img/member1.jpg", trait:"Web designer" },
+    { name:"Thomas Mechery", role:"Member", img:"img/member2.jpg", trait:"NCC Cadet" },
+    { name:"Adarsh N A", role:"Member", img:"img/member3.jpg", trait:"SPC Cadet" },
+    { name:"Roshit Lal", role:"Member", img:"img/member4.jpg", trait:"Tattoo lover" },
+    { name:"Sreehari C", role:"Member", img:"img/member5.jpg", trait:"Cinephile" },
+    { name:"Adhil Sidiqq", role:"Member", img:"img/member6.jpg", trait:"Runs an online clothing brand" },
+  ];
+
+  const initials = n => n.split(' ').map(w=>w[0]).slice(0,2).join('');
+
+  const roster = document.getElementById('roster');
+  team.forEach(m => {
+    const card = document.createElement('div');
+    card.className = 'card' + (m.lead ? ' lead' : '');
+    card.innerHTML = `
+      <div class="role">${m.role}</div>
+      <div class="avatar-wrap">
+        <img src="${m.img}" alt="${m.name}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+        <div class="avatar-fallback" style="display:none;">${initials(m.name)}</div>
+      </div>
+      <h3>${m.name}</h3>
+      <p class="trait">${m.trait}</p>
+    `;
+    roster.appendChild(card);
+  });
+
+  // check images: if they don't exist show fallback immediately (in case onerror doesn't fire fast in some viewers)
+  roster.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('error', function(){
+      this.style.display='none';
+      this.nextElementSibling.style.display='flex';
+    });
+  });
+
+  // unique list
+  const unique = [
+    ["Godson", "Web designer"], ["Sreehari", "Cinephile"], ["Adithyan", "Arm wrestler, gold medalist"],
+    ["Roshit", "Tattoo lover"], ["Adarsh", "SPC Cadet"], ["Adhil", "Online clothing brand"],
+    ["Thomas", "NCC Cadet"], ["Joel", "Personalized event management"]
+  ];
+  const uniqueList = document.getElementById('uniqueList');
+  unique.forEach(([n,t])=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<span>${n}</span><span>${t}</span>`;
+    uniqueList.appendChild(li);
+  });
+
+  // scroll reveal
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold:0.15 });
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('.card').forEach((el,i)=>{
+    el.classList.add('reveal');
+    el.style.transitionDelay = (i*0.05)+'s';
+    io.observe(el);
+  });
+</script>
 </body>
 </html>
